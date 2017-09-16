@@ -66,4 +66,12 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * PlayerJumpPower);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "KillPlane")
+        {
+            gameObject.SetActive(false);
+        }
+    } 
 }
