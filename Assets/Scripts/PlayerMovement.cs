@@ -71,7 +71,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.tag == "KillPlane")
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
+            if(respawnAble)
+            {
+                transform.position = respawnAble.RespawnPosition;
+            }
         }
     } 
 }
