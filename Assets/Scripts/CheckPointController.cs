@@ -44,12 +44,13 @@ public class CheckPointController : MonoBehaviour
         if (hit.collider.tag == "Player")
         {
             _open = !_open;
+            spriteRenderer.sprite = _open ? flagOpen : flagClosed;
+
             RespawnAble respawnAble = hit.collider.GetComponent<RespawnAble>();
             if (respawnAble)
             {
                 respawnAble.PassCheckPoint(transform.position);
             }
-            spriteRenderer.sprite = _open? flagOpen : flagClosed;
         }
     }
 }

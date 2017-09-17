@@ -16,7 +16,6 @@ public class RespawnAble : MonoBehaviour
     private void Start()
     {
         _position = transform.position;
-        Debug.Log("Start");
     }
 
     public virtual void PassCheckPoint(Vector3 position)

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
     private bool FacingRight = true;
@@ -22,16 +22,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-	void Update ()
+    void Update()
     {
         PlayerMove();
-	}
+    }
 
     void PlayerMove()
     {
         // Controls
         moveX = Input.GetAxis("Horizontal");
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -61,22 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if(IsGrounded)
+        if (IsGrounded)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * PlayerJumpPower);
         }
     }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.tag == "KillPlane")
-        {
-            //gameObject.SetActive(false);
-            RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
-            if(respawnAble)
-            {
-                transform.position = respawnAble.RespawnPosition;
-            }
-        }
-    } 
 }
