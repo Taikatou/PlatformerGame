@@ -2,6 +2,7 @@
 {
     public override void Kill()
     {
-        LevelManager.Manager.Respawn();
+        RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
+        respawnAble.Respawn();
     }
 }

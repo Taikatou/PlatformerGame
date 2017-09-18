@@ -1,9 +1,10 @@
-﻿using Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class LevelManager : MonoBehaviour, IRespawn
+public delegate void OnRespawn();
+
+public class LevelManager : MonoBehaviour
 {
     public Text coinText;
 
@@ -29,22 +30,21 @@ public class LevelManager : MonoBehaviour, IRespawn
     }
 
     // Update is called once per frame
-    public void Respawn ()
+    public void Respawn(GameObject gameObject, OnRespawn respawnDelegate)
     {
-        StartCoroutine("RespawnCo");
+        StartCoroutine(RespawnCo(gameObject, respawnDelegate));
     }
 
-    public IEnumerator RespawnCo()
+    public IEnumerator RespawnCo(GameObject gameObject, OnRespawn respawnDelegate)
     {
-        PlayerLife player = PlayerLife.StaticLife;
-        player.gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
-        Instantiate(DeathParticleEffect, player.transform.position, player.transform.rotation);
+        Instantiate(DeathParticleEffect, gameObject.transform.position, gameObject.transform.rotation);
 
         yield return new WaitForSeconds(waitToRespawn);
 
-        player.Respawn();
-        player.gameObject.SetActive(true);
+        respawnDelegate.Invoke();
+        gameObject.SetActive(true);
     }
 
     public static LevelManager Manager

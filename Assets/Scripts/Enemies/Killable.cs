@@ -4,8 +4,11 @@ public class Killable : MonoBehaviour
 {
     public float maxLife = 1;
     private float currentLife;
-    // Use this for initialization
-    void Start()
+    public GameObject deathEffect;
+
+    public float bounceForce = 3.0f;
+
+    private void Start()
     {
         currentLife = maxLife;
     }
@@ -19,8 +22,29 @@ public class Killable : MonoBehaviour
             currentLife--;
             if(currentLife <= 0)
             {
-                Destroy(gameObject);
+                HandleDeath(other);
             }
+        }
+    }
+
+    public virtual void HandleDeath(Collision2D player)
+    {
+        Rigidbody2D playerRB = player.collider.GetComponent<Rigidbody2D>();
+        playerRB.velocity = new Vector3(playerRB.velocity.x, bounceForce, 0.0f);
+        if(deathEffect)
+        {
+            Instantiate(deathEffect, transform.position, transform.rotation);
+            Debug.Log("Effect");
+        }
+
+        RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
+        if(respawnAble)
+        {
+            respawnAble.Respawn();
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }

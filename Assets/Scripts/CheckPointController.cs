@@ -46,7 +46,7 @@ public class CheckPointController : MonoBehaviour
             _open = !_open;
             spriteRenderer.sprite = _open ? flagOpen : flagClosed;
 
-            RespawnAble respawnAble = hit.collider.GetComponent<RespawnAble>();
+            PlayerRespawn respawnAble = hit.collider.GetComponent<PlayerRespawn>();
             if (respawnAble)
             {
                 respawnAble.PassCheckPoint(transform.position);

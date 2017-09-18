@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class SnakeController : MonoBehaviour {
+public class SnakeController : MonoBehaviour
+{
     public float moveSpeed;
     private bool canMove;
 

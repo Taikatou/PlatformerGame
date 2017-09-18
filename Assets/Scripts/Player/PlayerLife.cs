@@ -1,10 +1,9 @@
-﻿using Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void UpdateLife(int lifes);
 
-public class PlayerLife : MonoBehaviour, IRespawn
+public class PlayerLife : MonoBehaviour
 {
     public int maxhealth = 3;
     private int _life = 3;
@@ -20,7 +19,8 @@ public class PlayerLife : MonoBehaviour, IRespawn
             UpdateLifeDelegates();
             if (_life <= 0)
             {
-                LevelManager.Manager.Respawn();
+                RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
+                respawnAble.Respawn();
             }
         }
     }
@@ -52,24 +52,14 @@ public class PlayerLife : MonoBehaviour, IRespawn
         }
     }
 
-    void ResetLife()
+    public void ResetLife()
     {
         Life = maxhealth;
     }
 
-    void Start()
+    private void Start()
     {
         ResetLife();
-    }
-
-    public void Respawn()
-    {
-        RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
-        if (respawnAble)
-        {
-            ResetLife();
-            transform.position = respawnAble.RespawnPosition;
-        }
     }
 
     public void HurtPlayer(int damage)

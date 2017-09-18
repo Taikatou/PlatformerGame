@@ -2,6 +2,14 @@
 {
     public override void Kill()
     {
-        Destroy(gameObject);
+        RespawnAble shouldRespawn = gameObject.GetComponent<RespawnAble>();
+        if(shouldRespawn)
+        {
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
