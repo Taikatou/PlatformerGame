@@ -29,16 +29,12 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMove()
     {
-        // Controls
         moveX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        // Animation
-
-        // Player Direction
         bool FlipRight = moveX > 0.0f && !FacingRight;
         bool FlipLeft = moveX < 0.0f && FacingRight;
         if (FlipRight || FlipLeft)
@@ -46,7 +42,6 @@ public class PlayerController : MonoBehaviour
             FlipPlayer();
         }
 
-        // Physics
         Rigidbody2D rigidBody = gameObject.GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(moveX * PlayerSpeed, rigidBody.velocity.y);
     }
