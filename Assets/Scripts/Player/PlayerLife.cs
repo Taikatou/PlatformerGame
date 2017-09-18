@@ -1,9 +1,13 @@
 ﻿using Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
+
+public delegate void UpdateLife(int lifes);
 
 public class PlayerLife : MonoBehaviour, IRespawn
 {
-    private int _life = 1;
+    public int maxhealth = 3;
+    private int _life = 3;
     public int Life
     {
         get
@@ -13,19 +17,49 @@ public class PlayerLife : MonoBehaviour, IRespawn
         set
         {
             _life = value;
-            if(_life <= 0)
+            UpdateLifeDelegates();
+            if (_life <= 0)
             {
                 LevelManager.Manager.Respawn();
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private List<UpdateLife> _lifeDelegates;
+    public List<UpdateLife> LifeDelegates
     {
-        if (other.tag == "KillPlane")
+        get
         {
-            LevelManager.Manager.Respawn();
+            if(_lifeDelegates == null)
+            {
+                _lifeDelegates = new List<UpdateLife>();
+            }
+            return _lifeDelegates;
         }
+    }
+
+    public void AddLifeDeletate(UpdateLife lifeDelegate)
+    {
+        LifeDelegates.Add(lifeDelegate);
+        lifeDelegate.Invoke(Life);
+    }
+
+    public void UpdateLifeDelegates()
+    {
+        foreach(UpdateLife toUpdate in LifeDelegates)
+        {
+            toUpdate.Invoke(Life);
+        }
+    }
+
+    void ResetLife()
+    {
+        Life = maxhealth;
+    }
+
+    void Start()
+    {
+        ResetLife();
     }
 
     public void Respawn()
@@ -33,6 +67,7 @@ public class PlayerLife : MonoBehaviour, IRespawn
         RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
         if (respawnAble)
         {
+            ResetLife();
             transform.position = respawnAble.RespawnPosition;
         }
     }
