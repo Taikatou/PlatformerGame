@@ -6,6 +6,8 @@ public class RespawnAble : MonoBehaviour {
     [HideInInspector]
     public Vector3 _position;
 
+    public GameObject respawnEffect;
+
     public Vector3 RespawnPosition
     {
         get
@@ -24,8 +26,16 @@ public class RespawnAble : MonoBehaviour {
         transform.position = RespawnPosition;
     }
 
-    public void Respawn()
+    public static void TestRespawnable(GameObject gameObject, bool ignoreDestroy = false)
     {
-        LevelManager.Manager.Respawn(gameObject, OnRespawn);
+        RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
+        if (respawnAble)
+        {
+            LevelManager.Manager.Respawn(gameObject, respawnAble.OnRespawn, respawnAble.respawnEffect);
+        }
+        else if(!ignoreDestroy)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -19,8 +19,7 @@ public class PlayerLife : MonoBehaviour
             UpdateLifeDelegates();
             if (_life <= 0)
             {
-                RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
-                respawnAble.Respawn();
+                RespawnAble.TestRespawnable(gameObject, true);
             }
         }
     }

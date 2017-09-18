@@ -7,7 +7,7 @@ public class CollectableItem : MonoBehaviour
         if(other.tag == "Player")
         {
             LevelManager.Manager.AddCoin();
-            Destroy(gameObject);
+            RespawnAble.TestRespawnable(gameObject);
         }
     }
 }

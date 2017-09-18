@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114491466511720686}
   - component: {fileID: 114882892063479248}
   - component: {fileID: 114048791814935708}
+  - component: {fileID: 114280355639185728}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -172,6 +173,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageBy: 1
   hurtEveryXSecond: 1
+--- !u!114 &114280355639185728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010800652845864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ac4adee1d61d64e82b9c1702a87fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _set: 0
+  _position: {x: 0, y: 0, z: 0}
 --- !u!114 &114491466511720686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,6 +198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 1
+  deathEffect: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
+    type: 2}
+  bounceForce: 10
 --- !u!114 &114882892063479248
 MonoBehaviour:
   m_ObjectHideFlags: 1

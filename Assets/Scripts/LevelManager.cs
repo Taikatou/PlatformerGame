@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     public Text coinText;
 
     public float waitToRespawn;
-    public GameObject DeathParticleEffect;
 
     private int _coinCount;
     public int CoinCount
@@ -30,16 +29,19 @@ public class LevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Respawn(GameObject gameObject, OnRespawn respawnDelegate)
+    public void Respawn(GameObject gameObject, OnRespawn respawnDelegate, GameObject effect = null)
     {
-        StartCoroutine(RespawnCo(gameObject, respawnDelegate));
+        StartCoroutine(RespawnCo(gameObject, respawnDelegate, effect));
     }
 
-    public IEnumerator RespawnCo(GameObject gameObject, OnRespawn respawnDelegate)
+    public IEnumerator RespawnCo(GameObject gameObject, OnRespawn respawnDelegate, GameObject effect)
     {
         gameObject.SetActive(false);
 
-        Instantiate(DeathParticleEffect, gameObject.transform.position, gameObject.transform.rotation);
+        if(effect)
+        {
+            Instantiate(effect, gameObject.transform.position, gameObject.transform.rotation);
+        }
 
         yield return new WaitForSeconds(waitToRespawn);
 
