@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 
-public class StickToMovingObject : MonoBehaviour {
+public class StickToMovingObject : MonoBehaviour
+{
+
+    bool IsMovingPlatform(GameObject otherGO)
+    {
+        return otherGO.tag == "MovingObject";
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -9,11 +15,6 @@ public class StickToMovingObject : MonoBehaviour {
         {
             transform.parent = otherGO.transform;
         }
-    }
-
-    bool IsMovingPlatform(GameObject otherGO)
-    {
-        return otherGO.tag == "MovingObject";
     }
 
     private void OnCollisionExit2D(Collision2D other)
