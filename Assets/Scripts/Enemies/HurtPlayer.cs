@@ -12,6 +12,10 @@ public class HurtPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         hurtplayer = GetHurtPlayer(other);
+        if(hurtplayer)
+        {
+            ActivateHurt();
+        }
     }
 
     private void Update()
@@ -21,8 +25,7 @@ public class HurtPlayer : MonoBehaviour
             PlayerLife Player = PlayerLife.StaticLife;
             if (countDown <= 0 && Player)
             {
-                PlayerLife.StaticLife.HurtPlayer(gameObject, DamageBy);
-                countDown = hurtEveryXSecond;
+                ActivateHurt();
             }
             else
             {
@@ -31,6 +34,12 @@ public class HurtPlayer : MonoBehaviour
             KnockBack knockBack = Player.GetComponent<KnockBack>();
             knockBack.Knock(gameObject);
         }
+    }
+
+    public void ActivateHurt()
+    {
+        PlayerLife.StaticLife.HurtPlayer(gameObject, DamageBy);
+        countDown = hurtEveryXSecond;
     }
 
     private void OnTriggerExit2D(Collider2D other)
