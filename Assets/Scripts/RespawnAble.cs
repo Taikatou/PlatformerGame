@@ -7,6 +7,7 @@ public class RespawnAble : MonoBehaviour {
     public Vector3 _position;
 
     public GameObject respawnEffect;
+    public float respawnTime = 2.0f; 
 
     public Vector3 RespawnPosition
     {
@@ -31,7 +32,7 @@ public class RespawnAble : MonoBehaviour {
         RespawnAble respawnAble = gameObject.GetComponent<RespawnAble>();
         if (respawnAble)
         {
-            LevelManager.Manager.Respawn(gameObject, respawnAble.OnRespawn, respawnAble.respawnEffect);
+            LevelManager.Manager.Respawn(gameObject, respawnAble, respawnAble.OnRespawn);
         }
         else if(!ignoreDestroy)
         {

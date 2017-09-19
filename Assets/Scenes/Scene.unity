@@ -327,6 +327,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114308712545906232, guid: ee69558114caa7043a212acb21be0d7d,
+        type: 2}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee69558114caa7043a212acb21be0d7d, type: 2}
   m_IsPrefabParent: 0
@@ -702,9 +708,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 459446298}
-  waitToRespawn: 1
-  DeathParticleEffect: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
-    type: 2}
 --- !u!4 &799888388
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,6 +1437,17 @@ Prefab:
       value: 
       objectReference: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
         type: 2}
+    - target: {fileID: 114280355639185728, guid: e093e92a8777ee543ac6f062d0e824f6,
+        type: 2}
+      propertyPath: respawnEffect
+      value: 
+      objectReference: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
+        type: 2}
+    - target: {fileID: 114280355639185728, guid: e093e92a8777ee543ac6f062d0e824f6,
+        type: 2}
+      propertyPath: respawnTime
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e093e92a8777ee543ac6f062d0e824f6, type: 2}
   m_IsPrefabParent: 0
@@ -2091,6 +2105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _set: 0
   _position: {x: 0, y: 0, z: 0}
+  respawnEffect: {fileID: 0}
+  respawnTime: 2
 --- !u!1 &2029457366
 GameObject:
   m_ObjectHideFlags: 0
