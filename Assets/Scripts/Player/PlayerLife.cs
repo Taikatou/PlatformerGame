@@ -3,6 +3,8 @@ using UnityEngine;
 
 public delegate void UpdateLife(int lifes);
 
+
+[RequireComponent(typeof(KnockBack))]
 public class PlayerLife : MonoBehaviour
 {
     public int maxhealth = 3;
@@ -61,9 +63,11 @@ public class PlayerLife : MonoBehaviour
         ResetLife();
     }
 
-    public void HurtPlayer(int damage)
+    public void HurtPlayer(GameObject other, int damage)
     {
         Life -= damage;
+        KnockBack knockBack = gameObject.GetComponent<KnockBack>();
+        knockBack.Knock(other);
     }
 
     public void HealPlayer(int healBy)

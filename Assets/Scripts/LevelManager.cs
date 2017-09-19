@@ -1,29 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public delegate void OnRespawn();
 
 public class LevelManager : MonoBehaviour
 {
-    public Text coinText;
+    public AudioSource CoinSound;
 
-    private int _coinCount;
-    public int CoinCount
+    public void PlayCoinSound()
     {
-        get
-        {
-            return _coinCount;
-        }
-        set
-        {
-            _coinCount = value;
-            coinText.text = "Coins: " + CoinCount;
-        }
-    }
-    private void Start()
-    {
-        CoinCount = 0;
+        CoinSound.Play();
     }
 
     // Update is called once per frame
@@ -53,10 +39,5 @@ public class LevelManager : MonoBehaviour
         {
             return FindObjectOfType<LevelManager>();
         }
-    }
-
-    public void AddCoin(int coinNum = 1)
-    {
-        CoinCount += coinNum;
     }
 }

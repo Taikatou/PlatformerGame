@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerLife))]
 public class PlayerRespawn : RespawnAble
 {
     public virtual void PassCheckPoint(Vector3 position)
@@ -8,6 +10,11 @@ public class PlayerRespawn : RespawnAble
         {
             _set = true;
             _position = position;
+        }
+        PlayerStats playerStats = gameObject.GetComponent<PlayerStats>();
+        if (playerStats)
+        {
+            playerStats.CheckPoint();
         }
     }
 
@@ -18,6 +25,11 @@ public class PlayerRespawn : RespawnAble
         if (playerLife)
         {
             playerLife.ResetLife();
+        }
+        PlayerStats playerStats = gameObject.GetComponent<PlayerStats>();
+        if(playerStats)
+        {
+            playerStats.Reset();
         }
     }
 }

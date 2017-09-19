@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class RespawnAble : MonoBehaviour {
+public class RespawnAble : MonoBehaviour
+{
     [HideInInspector]
     public bool _set;
     [HideInInspector]

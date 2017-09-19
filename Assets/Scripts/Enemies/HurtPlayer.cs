@@ -21,7 +21,7 @@ public class HurtPlayer : MonoBehaviour
             PlayerLife Player = PlayerLife.StaticLife;
             if (countDown <= 0 && Player)
             {
-                PlayerLife.StaticLife.HurtPlayer(DamageBy);
+                PlayerLife.StaticLife.HurtPlayer(gameObject, DamageBy);
                 countDown = hurtEveryXSecond;
             }
             else

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(KnockBack))]
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
@@ -13,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask whatIsGround;
 
+    private KnockBack _knockBack;
+
+    public AudioSource jumpSound;
+
     public bool IsGrounded
     {
         get
@@ -22,9 +27,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Start()
     {
-        PlayerMove();
+        _knockBack = gameObject.GetComponent<KnockBack>();
+    }
+
+    private void Update()
+    {
+        if(!(_knockBack && _knockBack.KnockedBack))
+        {
+            PlayerMove();
+        }
     }
 
     void PlayerMove()
@@ -59,6 +72,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * PlayerJumpPower);
+            jumpSound.Play();
         }
     }
 }
