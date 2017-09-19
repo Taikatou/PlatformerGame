@@ -66,8 +66,6 @@ public class PlayerLife : MonoBehaviour
     public void HurtPlayer(GameObject other, int damage)
     {
         Life -= damage;
-        KnockBack knockBack = gameObject.GetComponent<KnockBack>();
-        knockBack.Knock(other);
     }
 
     public void HealPlayer(int healBy)

@@ -5,7 +5,7 @@
         RespawnAble shouldRespawn = gameObject.GetComponent<RespawnAble>();
         if(shouldRespawn)
         {
-
+            LevelManager.Manager.Respawn(gameObject, shouldRespawn, shouldRespawn.OnRespawn);
         }
         else
         {

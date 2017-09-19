@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(HurtPlayer))]
+[RequireComponent(typeof(GroundChecker))]
 public class Killable : MonoBehaviour
 {
     public float maxLife = 1;
@@ -16,7 +18,8 @@ public class Killable : MonoBehaviour
     {
         GameObject otherGO = other.gameObject;
         HurtPlayer hPlayer = gameObject.GetComponent<HurtPlayer>();
-        if(otherGO.tag == "Player" && !(hPlayer && hPlayer.hurtplayer))
+        GroundChecker groundChecker = otherGO.GetComponent<GroundChecker>();
+        if (otherGO.tag == "Player" && !((hPlayer && hPlayer.hurtplayer) || groundChecker.IsGrounded))
         {
             currentLife--;
             if(currentLife <= 0)

@@ -28,6 +28,8 @@ public class HurtPlayer : MonoBehaviour
             {
                 countDown -= Time.deltaTime;
             }
+            KnockBack knockBack = Player.GetComponent<KnockBack>();
+            knockBack.Knock(gameObject);
         }
     }
 
