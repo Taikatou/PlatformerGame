@@ -2,14 +2,13 @@
 
 [RequireComponent(typeof(KnockBack))]
 [RequireComponent(typeof(GroundChecker))]
+[RequireComponent(typeof(MovementSpeed))]
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
     private bool FacingRight = true;
 
-    public int PlayerSpeed = 10;
     public float PlayerJumpPower = 1250;
-    private float moveX;
 
     private KnockBack _knockBack;
 
@@ -17,10 +16,15 @@ public class PlayerController : MonoBehaviour
 
     private GroundChecker _groundChecker;
 
+    private bool OnPlatform;
+
+    private MovementSpeed _movementSpeed;
+
     private void Start()
     {
         _knockBack = gameObject.GetComponent<KnockBack>();
         _groundChecker = gameObject.GetComponent<GroundChecker>();
+        _movementSpeed = gameObject.GetComponent<MovementSpeed>();
     }
 
     private void Update()
@@ -31,23 +35,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void PlayerMove()
+    private void PlayerMove()
     {
-        moveX = Input.GetAxis("Horizontal");
+        float moveX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        bool FlipRight = moveX > 0.0f && !FacingRight;
-        bool FlipLeft = moveX < 0.0f && FacingRight;
-        if (FlipRight || FlipLeft)
+        bool flipRight = moveX > 0.0f && !FacingRight;
+        bool flipLeft = moveX < 0.0f && FacingRight;
+        if (flipRight || flipLeft)
         {
             FlipPlayer();
         }
 
         Rigidbody2D rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        rigidBody.velocity = new Vector2(moveX * PlayerSpeed, rigidBody.velocity.y);
+        _movementSpeed.ModifySpeed(moveX);
+        rigidBody.velocity = new Vector2(_movementSpeed.Speed, rigidBody.velocity.y);
     }
 
     void FlipPlayer()

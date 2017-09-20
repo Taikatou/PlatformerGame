@@ -1,28 +1,37 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(MovementSpeed))]
 public class StickToMovingObject : MonoBehaviour
 {
+    private MovementSpeed _movementSpeed;
 
-    bool IsMovingPlatform(GameObject otherGO)
+    private void Start()
     {
-        return otherGO.tag == "MovingObject";
+        _movementSpeed = gameObject.GetComponent<MovementSpeed>();
+    }
+
+    bool IsMovingPlatform(GameObject otherGo)
+    {
+        return otherGo.tag == "MovingObject";
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject otherGO = other.gameObject;
-        if (IsMovingPlatform(otherGO))
+        GameObject otherGo = other.gameObject;
+        if (IsMovingPlatform(otherGo))
         {
-            transform.parent = otherGO.transform;
+            transform.parent = otherGo.transform;
+            _movementSpeed.OnPlatform = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        GameObject otherGO = other.gameObject;
-        if (IsMovingPlatform(otherGO) && other.gameObject.activeSelf)
+        GameObject otherGo = other.gameObject;
+        if (IsMovingPlatform(otherGo) && other.gameObject.activeSelf)
         {
             transform.parent = null;
+            _movementSpeed.OnPlatform = false;
         }
     }
 }

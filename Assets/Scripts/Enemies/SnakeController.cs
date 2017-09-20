@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(MovementSpeed))]
 public class SnakeController : MonoBehaviour
 {
-    public float moveSpeed;
     private bool canMove;
+
+    private MovementSpeed _movementSpeed;
+
+    public bool MoveLeft = true;
+
+    private int Direction
+    {
+        get
+        {
+            return MoveLeft? -1: 1;
+        }
+    }
 
     public Rigidbody2D rigidBody
     {
@@ -13,13 +25,19 @@ public class SnakeController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _movementSpeed = gameObject.GetComponent<MovementSpeed>();
+    }
+
     // Update is called once per frame
     private void Update ()
     {
 		if(canMove)
         {
             Vector2 velocity = rigidBody.velocity;
-            rigidBody.velocity = new Vector3(-moveSpeed, velocity.y, 0f);
+            _movementSpeed.ModifySpeed(Direction);
+            rigidBody.velocity = new Vector3(_movementSpeed.Speed, velocity.y, 0f);
         }
 	}
 

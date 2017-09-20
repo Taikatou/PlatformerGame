@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114882892063479248}
   - component: {fileID: 114048791814935708}
   - component: {fileID: 114280355639185728}
+  - component: {fileID: 114567888512121152}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -44,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1010800652845864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.334, y: -0.211, z: 0}
+  m_LocalPosition: {x: 18.334, y: -0.876, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,18 +83,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: -0.05}
+  m_Offset: {x: 0.2, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.88, y: 0.4}
+    oldSize: {x: 1.76, y: 0.8}
     newSize: {x: 0.88, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.25}
+  m_Size: {x: 0.9, y: 0.5}
   m_EdgeRadius: 0
 --- !u!61 &61995045772397624
 BoxCollider2D:
@@ -107,18 +108,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: -0.1}
+  m_Offset: {x: 0.2, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.88, y: 0.4}
+    oldSize: {x: 1.76, y: 0.8}
     newSize: {x: 0.88, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.3}
+  m_Size: {x: 1.2, y: 0.3}
   m_EdgeRadius: 0
 --- !u!95 &95032713269288348
 Animator:
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a2a118ef3360245b2e9c9df07e2682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  MoveLeft: 1
 --- !u!114 &114262030474907094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,6 +174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageBy: 1
   hurtEveryXSecond: 1
+  knockBack: 1
+  ConsiderDirection: 0
 --- !u!114 &114280355639185728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +189,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _set: 0
   _position: {x: 0, y: 0, z: 0}
+  respawnEffect: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
+    type: 2}
+  respawnTime: 2
 --- !u!114 &114491466511720686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,9 +204,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 1
-  deathEffect: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
-    type: 2}
   bounceForce: 10
+--- !u!114 &114567888512121152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010800652845864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd26086e626740429d856b10bc67538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeedNormal: 3
+  MaxSpeedOnPlatform: 2
+  OnPlatform: 0
+  LerpScale: 0.1
 --- !u!114 &114882892063479248
 MonoBehaviour:
   m_ObjectHideFlags: 1

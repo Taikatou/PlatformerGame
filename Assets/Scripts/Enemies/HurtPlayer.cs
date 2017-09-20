@@ -8,10 +8,15 @@ public class HurtPlayer : MonoBehaviour
     private float countDown;
     public bool hurtplayer { get; private set; }
 
+    public bool knockBack = true;
+
+    public bool ConsiderDirection = false;
+
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
-        hurtplayer = GetHurtPlayer(other);
+        bool toRightOf = EnemyUtils.ToRightOf(gameObject, other.gameObject, ConsiderDirection);
+        hurtplayer = GetHurtPlayer(other) && toRightOf;
         if(hurtplayer)
         {
             ActivateHurt();
@@ -31,8 +36,11 @@ public class HurtPlayer : MonoBehaviour
             {
                 countDown -= Time.deltaTime;
             }
-            KnockBack knockBack = Player.GetComponent<KnockBack>();
-            knockBack.Knock(gameObject);
+            if(knockBack)
+            {
+                KnockBack knockBack = Player.GetComponent<KnockBack>();
+                knockBack.Knock(gameObject);
+            }
         }
     }
 

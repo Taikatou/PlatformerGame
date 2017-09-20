@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyOnContact : MonoBehaviour
 {
-
+    public bool ConsiderDirection = true;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        bool considerDestroy = EnemyUtils.ToRightOf(gameObject, other.gameObject, ConsiderDirection);
+        if(considerDestroy)
+        {
+            Destroy(gameObject);
+        }
 	}
 }
