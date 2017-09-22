@@ -21,7 +21,6 @@ public class FollowControl : MonoBehaviour
                                              follower.transform.position.z);
 
         float smooth = includeTime ? smoothing * Time.deltaTime : smoothing;
-        Debug.Log(smooth);
         follower.transform.position = Vector3.Lerp(follower.transform.position, targetPosition, smooth);
 	}
 }

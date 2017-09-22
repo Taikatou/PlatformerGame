@@ -28,7 +28,7 @@ public class StickToMovingObject : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         GameObject otherGo = other.gameObject;
-        if (IsMovingPlatform(otherGo) && other.gameObject.activeSelf)
+        if (IsMovingPlatform(otherGo) && gameObject.activeSelf)
         {
             transform.parent = null;
             _movementSpeed.OnPlatform = false;
