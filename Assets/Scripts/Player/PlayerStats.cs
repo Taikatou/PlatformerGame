@@ -8,6 +8,9 @@ public class PlayerStats : MonoBehaviour
     public Text coinText;
 
     private int _coinCount;
+
+    private List<IResetAble> _resetList;
+
     public int CoinCount
     {
         get
@@ -21,35 +24,33 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    List<IResetAble> resetList;
-
     public void AddResetAble(IResetAble resetAble)
     {
-        resetList.Add(resetAble);
+        _resetList.Add(resetAble);
     }
 
     public void Reset()
     {
-        foreach (IResetAble toReset in resetList)
+        foreach (IResetAble toReset in _resetList)
         {
             toReset.Reset(this);
         }
-        resetList.Clear();
+        _resetList.Clear();
     }
 
     public void CheckPoint()
     {
-        foreach (IResetAble toReset in resetList)
+        foreach (IResetAble toReset in _resetList)
         {
             toReset.Destroy();
         }
-        resetList.Clear();
+        _resetList.Clear();
     }
 
     private void Start()
     {
         CoinCount = 0;
-        resetList = new List<IResetAble>();
+        _resetList = new List<IResetAble>();
     }
 
     public void AddCoin(int coinNum = 1)
