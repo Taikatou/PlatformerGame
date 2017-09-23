@@ -11031,6 +11031,11 @@ Prefab:
       propertyPath: jumpSound
       value: 
       objectReference: {fileID: 1159187907}
+    - target: {fileID: 114470706190695476, guid: 78cb4ee0a613cad4ab0ab22e7a2c5a68,
+        type: 2}
+      propertyPath: PlayerJumpPower
+      value: 1500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78cb4ee0a613cad4ab0ab22e7a2c5a68, type: 2}
   m_IsPrefabParent: 0
