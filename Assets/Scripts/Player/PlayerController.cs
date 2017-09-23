@@ -1,29 +1,18 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(KnockBack))]
-[RequireComponent(typeof(GroundChecker))]
 [RequireComponent(typeof(MovementSpeed))]
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector]
-    private bool FacingRight = true;
-
-    public float PlayerJumpPower = 1250;
+    private bool _facingRight = true;
 
     private KnockBack _knockBack;
-
-    public AudioSource jumpSound;
-
-    private GroundChecker _groundChecker;
-
-    private bool OnPlatform;
 
     private MovementSpeed _movementSpeed;
 
     private void Start()
     {
         _knockBack = gameObject.GetComponent<KnockBack>();
-        _groundChecker = gameObject.GetComponent<GroundChecker>();
         _movementSpeed = gameObject.GetComponent<MovementSpeed>();
     }
 
@@ -38,13 +27,9 @@ public class PlayerController : MonoBehaviour
     private void PlayerMove()
     {
         float moveX = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
-        {
-            Jump();
-        }
 
-        bool flipRight = moveX > 0.0f && !FacingRight;
-        bool flipLeft = moveX < 0.0f && FacingRight;
+        bool flipRight = moveX > 0.0f && !_facingRight;
+        bool flipLeft = moveX < 0.0f && _facingRight;
         if (flipRight || flipLeft)
         {
             FlipPlayer();
@@ -55,20 +40,11 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = new Vector2(_movementSpeed.Speed, rigidBody.velocity.y);
     }
 
-    void FlipPlayer()
+    private void FlipPlayer()
     {
-        FacingRight = !FacingRight;
+        _facingRight = !_facingRight;
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
-    }
-
-    void Jump()
-    {
-        if (_groundChecker.IsGrounded)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * PlayerJumpPower);
-            jumpSound.Play();
-        }
     }
 }

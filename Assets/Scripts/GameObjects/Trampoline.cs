@@ -4,18 +4,20 @@ public class Trampoline : MonoBehaviour
 {
     public float JumpPower = 100;
 
-    public AudioSource jumpSound;
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up);
-        if (hit.collider && hit.collider.tag == "Player")
+        if(other.gameObject.transform.position.y > gameObject.transform.position.y)
         {
-            other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpPower);
-            if (jumpSound)
-            {
-                jumpSound.Play();
-            }
+            PlayerJump jumper = other.gameObject.GetComponent<PlayerJump>();
+            jumper.Jump(JumpPower);
+            jumper.IgnoreGround();
         }
     }
 }
