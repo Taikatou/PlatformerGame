@@ -9,11 +9,11 @@ public class PlayerJump : MonoBehaviour
 
     public AudioSource jumpSound;
 
-    private bool IgnoreGroundCheck = false;
+    private bool _ignoreGroundCheck = false;
 
     public void IgnoreGround()
     {
-        IgnoreGroundCheck = true;
+        _ignoreGroundCheck = true;
     }
 
     private void Start()
@@ -25,7 +25,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            if (_groundChecker.IsGrounded || IgnoreGroundCheck)
+            if (_groundChecker.IsGrounded || _ignoreGroundCheck)
             {
                 Jump(PlayerJumpPower);
             }
@@ -41,9 +41,9 @@ public class PlayerJump : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if(IgnoreGroundCheck && _groundChecker.IsGrounded)
+        if(_ignoreGroundCheck && _groundChecker.IsGrounded)
         {
-            IgnoreGroundCheck = false;
+            _ignoreGroundCheck = false;
         }
     }
 }
