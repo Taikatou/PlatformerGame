@@ -5,19 +5,29 @@ public class HurtPlayer : MonoBehaviour
     public int DamageBy = 1;
     public float hurtEveryXSecond = 1.0f;
 
-    private float countDown;
+    private float _hurtCountDown;
+
     public bool hurtplayer { get; private set; }
 
     public bool knockBack = true;
 
-    public bool ConsiderDirection = false;
+    public bool considerDirection = false;
+
+    public float validAfterXSeconds = 1.0f;
+
+    private float _countDown;
+
+    private void Start()
+    {
+        _countDown = validAfterXSeconds;
+    }
 
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool toRightOf = EnemyUtils.ToRightOf(gameObject, other.gameObject, ConsiderDirection);
+        bool toRightOf = EnemyUtils.ToRightOf(gameObject, other.gameObject, considerDirection);
         hurtplayer = GetHurtPlayer(other) && toRightOf;
-        if(hurtplayer)
+        if(hurtplayer && _hurtCountDown <= 0)
         {
             ActivateHurt();
         }
@@ -25,29 +35,38 @@ public class HurtPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (hurtplayer)
+        if(_countDown > 0)
         {
-            PlayerLife Player = PlayerLife.StaticLife;
-            if (countDown <= 0 && Player)
-            {
-                ActivateHurt();
-            }
-            else
-            {
-                countDown -= Time.deltaTime;
-            }
-            if(knockBack)
-            {
-                KnockBack knockBack = Player.GetComponent<KnockBack>();
-                knockBack.Knock(gameObject);
-            }
+            _countDown -= Time.deltaTime;
+        }
+        else if (hurtplayer)
+        {
+            UpdateHurt();
+        }
+    }
+
+    private void UpdateHurt()
+    {
+        PlayerLife Player = PlayerLife.StaticLife;
+        if (_hurtCountDown <= 0 && Player)
+        {
+            ActivateHurt();
+        }
+        else
+        {
+            _hurtCountDown -= Time.deltaTime;
+        }
+        if (knockBack)
+        {
+            KnockBack knockBack = Player.GetComponent<KnockBack>();
+            knockBack.Knock(gameObject);
         }
     }
 
     public void ActivateHurt()
     {
         PlayerLife.StaticLife.HurtPlayer(gameObject, DamageBy);
-        countDown = hurtEveryXSecond;
+        _hurtCountDown = hurtEveryXSecond;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -56,7 +75,6 @@ public class HurtPlayer : MonoBehaviour
         if(toStop)
         {
             hurtplayer = false;
-            countDown = 0;
         }
     }
 

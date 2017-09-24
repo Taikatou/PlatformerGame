@@ -11,9 +11,10 @@ public class Trampoline : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.transform.position.y > gameObject.transform.position.y)
+        GroundChecker checker = other.gameObject.GetComponent<GroundChecker>();
+        if(checker.IsGrounded)
         {
             PlayerJump jumper = other.gameObject.GetComponent<PlayerJump>();
             jumper.Jump(JumpPower);
