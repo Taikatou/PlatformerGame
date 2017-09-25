@@ -16,7 +16,6 @@ public class Trampoline : MonoBehaviour
         GroundChecker checker = other.gameObject.GetComponent<GroundChecker>();
         if(checker.IsGrounded)
         {
-            Debug.Log("Trigger");
             PlayerJump jumper = other.gameObject.GetComponent<PlayerJump>();
             jumper.Jump(JumpPower);
             jumper.IgnoreGround();
