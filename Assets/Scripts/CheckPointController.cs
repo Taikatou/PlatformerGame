@@ -39,9 +39,15 @@ public class CheckPointController : MonoBehaviour
         }
     }
 
-    void CheckCollision(RaycastHit2D hit)
+    public bool CheckIfPlayer(RaycastHit2D hit)
     {
-        if (hit.collider.tag == "Player")
+        return hit.collider.tag == "Player";
+    }
+
+    public virtual void CheckCollision(RaycastHit2D hit)
+    {
+        bool isPlayer = CheckIfPlayer(hit);
+        if (isPlayer)
         {
             _open = !_open;
             spriteRenderer.sprite = _open ? flagOpen : flagClosed;

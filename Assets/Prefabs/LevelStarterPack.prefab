@@ -328,7 +328,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105042464496810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.96, y: -0.77, z: 0}
+  m_LocalPosition: {x: 28.43, y: -1.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4087968873742306}
@@ -343,7 +343,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880235684698294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.645, z: 0}
+  m_LocalPosition: {x: 0, y: -0.569, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4005179965702502}
@@ -905,6 +905,7 @@ MonoBehaviour:
   respawnEffect: {fileID: 1859490329867614, guid: 822cceb855aa42a478370d4d49176a2a,
     type: 2}
   respawnTime: 2
+  ToRespawn: 1
 --- !u!114 &114152912764911290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1024,8 +1025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cadda3be19dc045b1b48ca9876a667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerJumpPower: 1250
-  jumpSound: {fileID: 0}
+  PlayerJumpPower: 1500
+  jumpSound: {fileID: 82918641247966108}
 --- !u!114 &114489818595391166
 MonoBehaviour:
   m_ObjectHideFlags: 1
