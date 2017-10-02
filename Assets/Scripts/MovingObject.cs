@@ -10,6 +10,12 @@ public class MovingObject : MonoBehaviour {
 
     public bool MovingToEnd = true;
 
+    public bool ConsiderX = true;
+
+    public bool ConsiderY = false;
+
+ 
+
     private Vector3 CurrentTarget
     {
         get
@@ -25,14 +31,20 @@ public class MovingObject : MonoBehaviour {
         Vector3 position = movingObject.transform.position;
         float speedPerSecond = moveSpeed * Time.deltaTime;
         Vector3 newPosition = Vector3.MoveTowards(position, CurrentTarget, speedPerSecond);
-        movingObject.transform.position = newPosition;
+        Rigidbody2D rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        Vector3 baseVelocity = (newPosition - position) / Time.deltaTime;
+        float xVelocity = ConsiderX ? baseVelocity.x : rigidBody.velocity.x;
+        float yVelocity = ConsiderY ? baseVelocity.y : rigidBody.velocity.y;
+        rigidBody.velocity = new Vector2(xVelocity, yVelocity);
         CheckEnd();
     }
 
     void CheckEnd()
     {
         Vector3 position = movingObject.transform.position;
-        if (position == CurrentTarget)
+        bool XCorrect = !ConsiderX || MathUtils.IsApproximate(position.x, CurrentTarget.x);
+        bool YCorrect = !ConsiderY || MathUtils.IsApproximate(position.y, CurrentTarget.y);
+        if (XCorrect && YCorrect)
         {
             MovingToEnd = !MovingToEnd;
         }
